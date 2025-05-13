@@ -53,6 +53,10 @@ class RobotCanFail(val robot: Robot, val probabilityOfFailure: Double) extends R
   export robot.{position, direction, turn}
   override def act(): Unit = if scala.util.Random.nextDouble() > probabilityOfFailure then robot.act()
 
+class RobotRepeated(val robot: Robot, val times: Int) extends Robot:
+  export robot.{position, direction, turn}
+  override def act(): Unit = for _ <- 1 to times do robot.act()
+
 @main def testRobot(): Unit =
   val robot = LoggingRobot(SimpleRobot((0, 0), Direction.North))
   robot.act() // robot at (0, 1) facing North

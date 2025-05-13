@@ -55,6 +55,7 @@ class RobotCanFailTests extends AnyFlatSpec with Matchers:
 
   it should "act correctly" in:
     val robotWithoutFailures = new RobotCanFail(SimpleRobot((0, 0), Direction.North), 0)
+    val robotAlwaysFailing = new RobotCanFail(SimpleRobot((0, 0), Direction.North), 1)
 
     robotWithoutFailures.act()
     robotWithoutFailures.position should be((0, 1))
@@ -70,8 +71,6 @@ class RobotCanFailTests extends AnyFlatSpec with Matchers:
     robotWithoutFailures.turn(Direction.West)
     robotWithoutFailures.act()
     robotWithoutFailures.position should be((0, 0))
-
-    val robotAlwaysFailing = new RobotCanFail(SimpleRobot((0, 0), Direction.North), 1)
 
     robotAlwaysFailing.act()
     robotAlwaysFailing.position should be((0, 0))

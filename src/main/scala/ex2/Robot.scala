@@ -49,6 +49,10 @@ class RobotWithBattery(val robot: Robot, val batteryNeededForAction: Int) extend
     battery -= batteryNeededForAction
     robot.act()
 
+class RobotCanFail(val robot: Robot, val probabilityOfFailure: Double) extends Robot:
+  export robot.{position, direction, turn}
+  override def act(): Unit = if scala.util.Random.nextDouble() > probabilityOfFailure then robot.act()
+
 @main def testRobot(): Unit =
   val robot = LoggingRobot(SimpleRobot((0, 0), Direction.North))
   robot.act() // robot at (0, 1) facing North

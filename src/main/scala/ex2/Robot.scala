@@ -49,9 +49,9 @@ class RobotWithBattery(val robot: Robot, val batteryNeededForAction: Int) extend
     battery -= batteryNeededForAction
     robot.act()
 
-class RobotCanFail(val robot: Robot, val probabilityOfFailure: Double) extends Robot:
+class RobotCanFail(val robot: Robot, val failureChance: Double) extends Robot:
   export robot.{position, direction, turn}
-  override def act(): Unit = if scala.util.Random.nextDouble() > probabilityOfFailure then robot.act()
+  override def act(): Unit = if scala.util.Random.nextDouble() > failureChance then robot.act()
 
 class RobotRepeated(val robot: Robot, val times: Int) extends Robot:
   export robot.{position, direction, turn}
